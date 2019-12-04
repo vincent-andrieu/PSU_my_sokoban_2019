@@ -10,6 +10,27 @@
 #include "my.h"
 #include "my_sokoban.h"
 
+bool check_map_char(char **map, int i)
+{
+    char list[] = " XOP#";
+    bool is_valid = false;
+
+    for (int k = 0; map[i][k] != '\0'; k++) {
+        for (int j = 0; list[j] != '\0'; j++) {
+            if (map[i][k] == list[j]) {
+                is_valid = true;
+                break;
+            }
+        }
+        if (!is_valid)
+            return true;
+        is_valid = false;
+    }
+    if (map[i + 1] == NULL)
+        return false;
+    return check_map_char(map, i + 1);
+}
+
 static int game(char **map, vector2i_t *t_coords)
 {
     vector2i_t p_coord;
@@ -61,6 +82,8 @@ int main(int argc, char **argv)
         return usage(EXIT_ERROR, HEADER_FILEPATH);
     map = get_map(argv[1]);
     if (map == NULL)
+        return EXIT_ERROR;
+    if (check_map_char(map, 0))
         return EXIT_ERROR;
     return my_sokoban(map, argv);
 }
