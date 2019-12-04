@@ -39,21 +39,11 @@ bool check_win(char **map, vector2i_t *coords)
     return true;
 }
 
-static bool is_coord_target(vector2i_t *coords, int x, int y)
-{
-    for (int i = 0; coords[i].x != -1; i++)
-        if (coords[i].x == x && coords[i].y == y)
-            return true;
-    return false;
-}
-
 bool check_lose(char **map, vector2i_t *coords, int i)
 {
     int count_x = 0;
     int count_y = 0;
 
-    if (map[i + 1] == NULL)
-        return false;
     for (int k = 1; map[i][k + 1] != '\0'; k++) {
         if (map[i][k] == BOXE) {
             count_y += map[i - 1][k] == WALL;
@@ -61,11 +51,15 @@ bool check_lose(char **map, vector2i_t *coords, int i)
             count_x += map[i][k - 1] == WALL;
             count_x += map[i][k + 1] == WALL;
         }
-        if (!is_coord_target(coords, k, i) && map[i][k] == BOXE
+        if (map[i][k] == BOXE
         && count_x >= 1 && count_y >= 1)
-            return true;
+            break;
+        else if (map[i][k] == BOXE)
+            return false;
         count_x = 0;
         count_y = 0;
     }
+    if (map[i + 1] == NULL)
+        return true;
     return check_lose(map, coords, i + 1);
 }
