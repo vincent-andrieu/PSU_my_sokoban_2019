@@ -10,12 +10,14 @@
 #include "my.h"
 #include "my_sokoban.h"
 
-static void game(char **map, vector2i_t *t_coords)
+static int game(char **map, vector2i_t *t_coords)
 {
     vector2i_t p_coord;
     int key_pressed = -1;
 
     do {
+        if (check_lose(map))
+            return EXIT_LOSE;
         p_coord = get_player_coord(map, 0);
         key_pressed = getch();
         get_arrow_pressed(map, p_coord, key_pressed);
@@ -23,21 +25,23 @@ static void game(char **map, vector2i_t *t_coords)
         clear();
         print_map(map);
     } while (key_pressed != ' ' && !check_win(map, t_coords));
+    return EXIT_SUCCESS;
 }
 
 static int my_sokoban(char **map)
 {
     vector2i_t *t_coords = get_targets_coords(map);
+    int exit_value;
 
     if (t_coords == NULL)
         return EXIT_ERROR;
     initscr();
     attron(A_NORMAL);
     print_map(map);
-    game(map, t_coords);
+    exit_value = game(map, t_coords);
     endwin();
     free_tab(map, t_coords);
-    return EXIT_SUCCESS;
+    return exit_value;
 }
 
 int main(int argc, char **argv)
