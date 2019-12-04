@@ -62,10 +62,10 @@ static char *get_buffer_map(char *filepath)
         free(buffer);
         return NULL;
     }
-    close(fd);
     if (buffer == NULL)
         return NULL;
     size = read(fd, buffer, file_size);
+    close(fd);
     if (size <= 0) {
         free(buffer);
         return NULL;
