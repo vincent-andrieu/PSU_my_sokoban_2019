@@ -17,14 +17,6 @@ void free_tab(char **map, vector2i_t *t_coords)
     free(t_coords);
 }
 
-void print_map(char **map)
-{
-    for (int i = 0; map[i] != NULL; i++) {
-        printw(map[i]);
-        printw("\n");
-    }
-}
-
 vector2i_t get_player_coord(char **map, int i)
 {
     if (map[i] == NULL)

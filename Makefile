@@ -10,7 +10,8 @@ SRC =   src/main.c	\
 		src/usage/usage.c	\
 		src/map.c	\
 		src/arrows.c	\
-		src/targets.c
+		src/targets.c	\
+		src/win_lose.c
 
 OBJ =   $(SRC:.c=.o)
 
