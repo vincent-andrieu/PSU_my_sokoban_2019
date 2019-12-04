@@ -39,5 +39,8 @@ int check_map(char **map);
 void get_arrow_pressed(char **map, vector2i_t p_coord, int key_pressed);
 vector2i_t *get_targets_coords(char **map);
 void refresh_targets(char **map, vector2i_t *coords);
+void free_tab(char **map, vector2i_t *t_coords);
+void print_map(char **map);
+vector2i_t get_player_coord(char **map, int i);
 
 #endif

@@ -6,6 +6,7 @@
 ##
 
 SRC =   src/main.c	\
+		src/functions.c	\
 		src/usage/usage.c	\
 		src/map.c	\
 		src/arrows.c	\

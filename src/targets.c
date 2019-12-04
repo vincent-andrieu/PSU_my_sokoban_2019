@@ -6,7 +6,6 @@
 */
 
 #include <stdlib.h>
-#include <SFML/Graphics.h>
 #include "my_sokoban.h"
 
 static int get_targets_nbr(char **map, int count, int i)

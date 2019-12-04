@@ -5,7 +5,6 @@
 ** mange arrows moves
 */
 
-#include <SFML/Graphics.h>
 #include "my_sokoban.h"
 
 static void arrow_up(char **map, vector2i_t coord, int i)

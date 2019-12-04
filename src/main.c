@@ -6,49 +6,15 @@
 */
 
 #include <stdlib.h>
-#include <SFML/Graphics.h>
 #include <ncurses.h>
 #include "my.h"
 #include "my_sokoban.h"
 
-static void free_tab(char **map, vector2i_t *t_coords)
-{
-    for (int i = 0; map[i] != NULL; i++)
-        free(map[i]);
-    free(map);
-    free(t_coords);
-}
-
-static void print_map(char **map)
-{
-    for (int i = 0; map[i] != NULL; i++) {
-        printw(map[i]);
-        printw("\n");
-    }
-}
-
-static vector2i_t get_player_coord(char **map, int i)
-{
-    if (map[i] == NULL)
-        return (vector2i_t) {-1, -1};
-    for (int k = 0; map[i][k] != '\0'; k++) {
-        if (map[i][k] == PLAYER)
-            return (vector2i_t) {k, i};
-    }
-    return get_player_coord(map, i + 1);
-}
-
-static int my_sokoban(char **map)
+static void game(char **map, vector2i_t *t_coords)
 {
     vector2i_t p_coord;
-    vector2i_t *t_coords = get_targets_coords(map);
     int key_pressed = -1;
 
-    if (t_coords == NULL)
-        return EXIT_ERROR;
-    initscr();
-    attron(A_NORMAL);
-    print_map(map);
     while (key_pressed != ' ') {
         p_coord = get_player_coord(map, 0);
         key_pressed = getch();
@@ -57,6 +23,18 @@ static int my_sokoban(char **map)
         clear();
         print_map(map);
     }
+}
+
+static int my_sokoban(char **map)
+{
+    vector2i_t *t_coords = get_targets_coords(map);
+
+    if (t_coords == NULL)
+        return EXIT_ERROR;
+    initscr();
+    attron(A_NORMAL);
+    print_map(map);
+    game(map, t_coords);
     endwin();
     free_tab(map, t_coords);
     return EXIT_SUCCESS;
