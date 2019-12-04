@@ -35,3 +35,11 @@ vector2i_t get_player_coord(char **map, int i)
     }
     return get_player_coord(map, i + 1);
 }
+
+bool check_win(char **map, vector2i_t *coords)
+{
+    for (int i = 0; coords[i].x != -1 && coords[i].y != -1; i++)
+        if (map[coords[i].y][coords[i].x] != BOXE)
+            return false;
+    return true;
+}

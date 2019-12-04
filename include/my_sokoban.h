@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include <SFML/Graphics.h>
+#include <stdbool.h>
 
 #ifndef MY_SOKOBAN_H_
 #define MY_SOKOBAN_H_
@@ -42,5 +42,6 @@ void refresh_targets(char **map, vector2i_t *coords);
 void free_tab(char **map, vector2i_t *t_coords);
 void print_map(char **map);
 vector2i_t get_player_coord(char **map, int i);
+bool check_win(char **map, vector2i_t *coords);
 
 #endif

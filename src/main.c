@@ -15,14 +15,14 @@ static void game(char **map, vector2i_t *t_coords)
     vector2i_t p_coord;
     int key_pressed = -1;
 
-    while (key_pressed != ' ') {
+    do {
         p_coord = get_player_coord(map, 0);
         key_pressed = getch();
         get_arrow_pressed(map, p_coord, key_pressed);
         refresh_targets(map, t_coords);
         clear();
         print_map(map);
-    }
+    } while (key_pressed != ' ' && !check_win(map, t_coords));
 }
 
 static int my_sokoban(char **map)
