@@ -11,8 +11,11 @@
 
 void free_tab(char **map, vector2i_t *t_coords)
 {
-    for (int i = 0; map[i] != NULL; i++)
+    int i = 0;
+
+    for (; map[i] != NULL; i++)
         free(map[i]);
+    free(map[i]);
     free(map);
     free(t_coords);
 }
@@ -43,7 +46,7 @@ bool check_lose(char **map, int i)
 
     if (map[i + 1] == NULL)
         return false;
-    for (int k = 0; map[i][k] != '\0'; k++) {
+    for (int k = 1; map[i][k + 1] != '\0'; k++) {
         count_y += map[i - 1][k] == WALL;
         count_y += map[i + 1][k] == WALL;
         count_x += map[i][k - 1] == WALL;

@@ -55,12 +55,21 @@ static char *get_buffer_map(char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
     int file_size = get_filesize(filepath);
-    char *buffer = malloc(sizeof(char) * (file_size + 1));
-    int size = buffer != NULL ? read(fd, buffer, file_size) : -1;
+    char *buffer = fd != -1 ? malloc(sizeof(char) * (file_size + 1)) : NULL;
+    int size;
 
-    close(fd);
-    if (buffer == NULL || size <= 0)
+    if (fd == -1) {
+        free(buffer);
         return NULL;
+    }
+    close(fd);
+    if (buffer == NULL)
+        return NULL;
+    size = read(fd, buffer, file_size);
+    if (size <= 0) {
+        free(buffer);
+        return NULL;
+    }
     buffer[file_size] = '\0';
     return buffer;
 }
