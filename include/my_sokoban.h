@@ -44,6 +44,6 @@ void free_tab(char **map, vector2i_t *t_coords);
 void print_map(char **map);
 vector2i_t get_player_coord(char **map, int i);
 bool check_win(char **map, vector2i_t *coords);
-bool check_lose(char **map);
+bool check_lose(char **map, int i);
 
 #endif

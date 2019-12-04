@@ -44,22 +44,22 @@ bool check_win(char **map, vector2i_t *coords)
     return true;
 }
 
-static int check_boxes_arround(char **map, int x, int y)
+bool check_lose(char **map, int i)
 {
-    int count = 0;
+    int count_x = 0;
+    int count_y = 0;
 
-    count += map[y - 1][x] == WALL;
-    count += map[y + 1][x] == WALL;
-    count += map[y][x - 1] == WALL;
-    count += map[y][x + 1] == WALL;
-    return count;
-}
-
-bool check_lose(char **map)
-{
-    for (int i = 1; map[i + 1] != NULL; i++)
-        for (int k = 1; map[i][k + 1] != '\0'; k++)
-            if (map[i][k] == BOXE && check_boxes_arround(map, k, i) >= 2)
-                return true;
-    return false;
+    if (map[i + 1] == NULL)
+        return false;
+    for (int k = 0; map[i][k] != '\0'; k++) {
+        count_y += map[i - 1][k] == WALL;
+        count_y += map[i + 1][k] == WALL;
+        count_x += map[i][k - 1] == WALL;
+        count_x += map[i][k + 1] == WALL;
+        if (map[i][k] == BOXE && count_x >= 1 && count_y >= 1)
+            return true;
+        count_x = 0;
+        count_y = 0;
+    }
+    return check_lose(map, i + 1);
 }
