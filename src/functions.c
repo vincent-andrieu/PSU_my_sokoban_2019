@@ -39,27 +39,25 @@ bool check_win(char **map, vector2i_t *coords)
     return true;
 }
 
-bool check_lose(char **map, vector2i_t *coords, int i)
+bool check_lose(char **map, vector2i_t *coords, int box_nbr, int i)
 {
     int count_x = 0;
     int count_y = 0;
 
     for (int k = 1; map[i][k + 1] != '\0'; k++) {
         if (map[i][k] == BOXE) {
-            count_y += map[i - 1][k] == WALL;
-            count_y += map[i + 1][k] == WALL;
-            count_x += map[i][k - 1] == WALL;
-            count_x += map[i][k + 1] == WALL;
+            count_y += map[i - 1][k] == WALL || map[i - 1][k] == BOXE;
+            count_y += map[i + 1][k] == WALL || map[i + 1][k] == BOXE;
+            count_x += map[i][k - 1] == WALL || map[i][k - 1] == BOXE;
+            count_x += map[i][k + 1] == WALL || map[i][k + 1] == BOXE;
+            box_nbr++;
         }
-        if (map[i][k] == BOXE
-        && count_x >= 1 && count_y >= 1)
-            break;
-        else if (map[i][k] == BOXE)
+        if (map[i][k] == BOXE && (count_x == 0 || count_y == 0))
             return false;
         count_x = 0;
         count_y = 0;
     }
-    if (map[i + 1] == NULL)
+    if (map[i + 1] == NULL || coords[box_nbr].x == -1)
         return true;
-    return check_lose(map, coords, i + 1);
+    return check_lose(map, coords, box_nbr, i + 1);
 }

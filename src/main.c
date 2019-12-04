@@ -37,7 +37,7 @@ static int game(char **map, vector2i_t *t_coords)
     int key_pressed = -1;
 
     do {
-        if (check_lose(map, t_coords, 1))
+        if (check_lose(map, t_coords, -1, 1))
             return EXIT_LOSE;
         p_coord = get_player_coord(map, 0);
         key_pressed = getch();
