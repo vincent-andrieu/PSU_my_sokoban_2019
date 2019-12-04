@@ -11,7 +11,7 @@ SRC =   src/main.c	\
 		src/map.c	\
 		src/arrows.c	\
 		src/targets.c	\
-		src/win_lose.c
+		src/print_map.c
 
 OBJ =   $(SRC:.c=.o)
 
