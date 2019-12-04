@@ -25,10 +25,12 @@ static int game(char **map, vector2i_t *t_coords)
         clear();
         print_map(map);
     } while (key_pressed != ' ' && !check_win(map, t_coords));
+    if (key_pressed == ' ')
+        return EXIT_RESET;
     return EXIT_SUCCESS;
 }
 
-static int my_sokoban(char **map)
+static int my_sokoban(char **map, char **argv)
 {
     vector2i_t *t_coords = get_targets_coords(map);
     int exit_value;
@@ -39,8 +41,11 @@ static int my_sokoban(char **map)
     attron(A_NORMAL);
     print_map(map);
     exit_value = game(map, t_coords);
+    clear();
     endwin();
     free_tab(map, t_coords);
+    if (exit_value == EXIT_RESET)
+        return main(2, argv);
     return exit_value;
 }
 
@@ -61,5 +66,5 @@ int main(int argc, char **argv)
     error = check_map(map);
     if (error != EXIT_SUCCESS)
         return error;
-    return my_sokoban(map);
+    return my_sokoban(map, argv);
 }

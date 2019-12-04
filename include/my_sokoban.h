@@ -17,6 +17,7 @@
 #define EXIT_SUCCESS 0
 #define EXIT_ERROR 84
 #define EXIT_LOSE 1
+#define EXIT_RESET 42
 
 #define WALL '#'
 #define BOXE 'X'
@@ -46,5 +47,6 @@ vector2i_t get_player_coord(char **map, int i);
 bool check_win(char **map, vector2i_t *coords);
 bool check_lose(char **map, int i);
 void print_map(char **map);
+int main(int argc, char **argv);
 
 #endif
