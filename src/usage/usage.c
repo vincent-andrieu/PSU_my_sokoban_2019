@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_screensaver
+** my_sokoban
 ** File description:
 ** usage function
 */
@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include "my.h"
+#include "my_sokoban.h"
 
 off_t get_filesize(char *filepath)
 {
@@ -23,13 +24,18 @@ int usage(int exit_value, char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
     int file_size = get_filesize(filepath);
-    char *buffer = malloc(sizeof(char) * file_size);
-    int size = read(fd, buffer, file_size);
+    char *buffer = fd != -1 ? malloc(sizeof(char) * file_size) : NULL;
+    int size;
 
-    buffer[file_size] = '\0';
+    if (fd == -1 || buffer == NULL)
+        return EXIT_ERROR;
+    size = read(fd, buffer, file_size);
     close(fd);
-    if (size <= 0)
-        return 84;
+    buffer[file_size] = '\0';
+    if (size <= 0) {
+        free(buffer);
+        return EXIT_ERROR;
+    }
     write(1, buffer, size);
     free(buffer);
     return exit_value;

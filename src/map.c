@@ -58,11 +58,7 @@ static char *get_buffer_map(char *filepath)
     char *buffer = fd != -1 ? malloc(sizeof(char) * (file_size + 1)) : NULL;
     int size;
 
-    if (fd == -1) {
-        free(buffer);
-        return NULL;
-    }
-    if (buffer == NULL)
+    if (fd == -1 || buffer == NULL)
         return NULL;
     size = read(fd, buffer, file_size);
     close(fd);

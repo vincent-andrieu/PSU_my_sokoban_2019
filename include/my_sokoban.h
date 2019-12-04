@@ -13,7 +13,7 @@
 
 #define MSG_INVALID_ARG_NBR "Invalid argument number\n"
 #define MSG_RESIZE_SCREEN "Enlarge the screen"
-#define HEADER_FILEPATH "usage/header.txt"
+#define HEADER_FILEPATH "src/usage/header.txt"
 #define EXIT_SUCCESS 0
 #define EXIT_ERROR 84
 #define EXIT_LOSE 1
