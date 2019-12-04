@@ -55,10 +55,12 @@ bool check_lose(char **map, vector2i_t *coords, int i)
     if (map[i + 1] == NULL)
         return false;
     for (int k = 1; map[i][k + 1] != '\0'; k++) {
-        count_y += map[i - 1][k] == WALL;
-        count_y += map[i + 1][k] == WALL;
-        count_x += map[i][k - 1] == WALL;
-        count_x += map[i][k + 1] == WALL;
+        if (map[i][k] == BOXE) {
+            count_y += map[i - 1][k] == WALL;
+            count_y += map[i + 1][k] == WALL;
+            count_x += map[i][k - 1] == WALL;
+            count_x += map[i][k + 1] == WALL;
+        }
         if (!is_coord_target(coords, k, i) && map[i][k] == BOXE
         && count_x >= 1 && count_y >= 1)
             return true;
