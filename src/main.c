@@ -52,7 +52,6 @@ static int my_sokoban(char **map, char **argv)
 int main(int argc, char **argv)
 {
     char **map;
-    int error;
 
     if (argc != 2) {
         my_put_error_str(MSG_INVALID_ARG_NBR);
@@ -63,8 +62,5 @@ int main(int argc, char **argv)
     map = get_map(argv[1]);
     if (map == NULL)
         return EXIT_ERROR;
-    error = check_map(map);
-    if (error != EXIT_SUCCESS)
-        return error;
     return my_sokoban(map, argv);
 }
