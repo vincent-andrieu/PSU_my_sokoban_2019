@@ -15,7 +15,7 @@ static void arrow_up(char **map, vector2i_t coord)
         map[coord.y - 1][coord.x] = SPACE;
     }
     if (map[coord.y - 1][coord.x] == SPACE
-    || map[coord.y - 2][coord.x] == TARGET) {
+    || map[coord.y - 1][coord.x] == TARGET) {
         map[coord.y - 1][coord.x] = PLAYER;
         map[coord.y][coord.x] = SPACE;
     }
@@ -29,7 +29,7 @@ static void arrow_down(char **map, vector2i_t coord)
         map[coord.y + 1][coord.x] = SPACE;
     }
     if (map[coord.y + 1][coord.x] == SPACE
-    || map[coord.y + 2][coord.x] == TARGET) {
+    || map[coord.y + 1][coord.x] == TARGET) {
         map[coord.y + 1][coord.x] = PLAYER;
         map[coord.y][coord.x] = SPACE;
     }
@@ -43,7 +43,7 @@ static void arrow_left(char **map, vector2i_t coord)
         map[coord.y][coord.x - 1] = SPACE;
     }
     if (map[coord.y][coord.x - 1] == SPACE
-    || map[coord.y][coord.x - 2] == TARGET) {
+    || map[coord.y][coord.x - 1] == TARGET) {
         map[coord.y][coord.x - 1] = PLAYER;
         map[coord.y][coord.x] = SPACE;
     }
@@ -57,7 +57,7 @@ static void arrow_right(char **map, vector2i_t coord)
         map[coord.y][coord.x + 1] = SPACE;
     }
     if (map[coord.y][coord.x + 1] == SPACE
-    || map[coord.y][coord.x + 2] == TARGET) {
+    || map[coord.y][coord.x + 1] == TARGET) {
         map[coord.y][coord.x + 1] = PLAYER;
         map[coord.y][coord.x] = SPACE;
     }
