@@ -35,7 +35,7 @@ int check_map(char **map)
     int k;
 
     for (int i = 0; map[0][i] != '\0'; i++)
-        if (map[0][i] != WALL)
+        if (map[0][i] != WALL && map[0][i] != SPACE)
             return EXIT_ERROR;
     for (; map[count] != NULL; count++);
     for (int i = 0; map[count - 1][i] != '\0'; i++)
