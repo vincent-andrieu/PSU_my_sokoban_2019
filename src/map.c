@@ -39,10 +39,10 @@ int check_map(char **map)
             return EXIT_ERROR;
     for (; map[count] != NULL; count++);
     for (int i = 0; map[count - 1][i] != '\0'; i++)
-        if (map[count - 1][i] != WALL)
+        if (map[count - 1][i] != WALL && map[count - 1][i] != SPACE)
             return EXIT_ERROR;
     for (int i = 0; map[i] != NULL; i++) {
-        if (map[i][0] != WALL)
+        if (map[i][0] != WALL && map[i][0] != SPACE)
             return EXIT_ERROR;
         for (k = 0; map[i][k] != '\n' && map[i][k] != '\0'; k++);
         if (map[i][k - 1] != WALL)
