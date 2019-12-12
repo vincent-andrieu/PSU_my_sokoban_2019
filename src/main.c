@@ -10,7 +10,7 @@
 #include "my.h"
 #include "my_sokoban.h"
 
-bool check_map_char(char **map, int i)
+static bool check_map_char(char **map, int i)
 {
     char list[] = " XOP#";
     bool is_valid = false;
@@ -45,6 +45,7 @@ static int game(char **map, vector2i_t *t_coords)
         refresh_targets(map, t_coords);
         clear();
         print_map(map);
+        refresh();
     } while (key_pressed != ' ' && !check_win(map, t_coords));
     if (key_pressed == ' ')
         return EXIT_RESET;
