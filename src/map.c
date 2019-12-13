@@ -45,7 +45,7 @@ int check_map(char **map)
         if (map[i][0] != WALL && map[i][0] != SPACE)
             return EXIT_ERROR;
         for (k = 0; map[i][k] != '\n' && map[i][k] != '\0'; k++);
-        if (map[i][k - 1] != WALL)
+        if (map[i][k - 1] != WALL && map[i][0] != SPACE)
             return EXIT_ERROR;
     }
     return check_entities(map);
